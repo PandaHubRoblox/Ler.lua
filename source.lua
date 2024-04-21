@@ -215,9 +215,3 @@ function API:killall(TeamToKill)
 		end)
 	end
 end
-local giveToHumanoidValues = {
-	["WalkSpeed"] = 100;
-	["UseJumpPower"] = true;
-	["JumpPower"] = 100;
-}
-API:GiveToHumanoid(game.Players.LocalPlayer, giveToHumanoidValues)
