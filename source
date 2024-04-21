@@ -215,3 +215,5 @@ function API:killall(TeamToKill)
 		end)
 	end
 end
+
+return API

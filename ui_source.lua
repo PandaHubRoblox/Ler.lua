@@ -1,6 +1,9 @@
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
-local source = loadstring(game:HttpGet('https://raw.githubusercontent.com/PandaHubRoblox/Ler.lua/main/source'))()
+local source = game:HttpGet('https://raw.githubusercontent.com/PandaHubRoblox/Ler.lua/main/source')
  
+if source == nil then
+    print("bug what the hell")
+end
 
 local HumanoidStupidTable = {}
 
@@ -37,14 +40,14 @@ local MainTab = MainWindow:CreateTab("Main", 4483362458) -- Title, Image
 local Button = MainTab:CreateButton({
     Name = "Give to humanoid";
     Callback = function(v)
-        v = source:GiveToHumanoid(game.Players.LocalPlayer, HumanoidStupidTable) 
+        source:GiveToHumanoid(game.Players.LocalPlayer, HumanoidStupidTable) 
     end;
 })
 
 local Button = MainTab:CreateButton({
     Name = "Kill All Players";
     Callback = function(v)
-        v = source:KillAllPlayers(false, nil)
+        source:KillAllPlayers(false, nil)
     end;
 })
  
