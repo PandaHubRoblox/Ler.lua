@@ -1,9 +1,11 @@
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
-local source = game:HttpGet('https://raw.githubusercontent.com/PandaHubRoblox/Ler.lua/main/source')
+local text = game:HttpGet('https://raw.githubusercontent.com/PandaHubRoblox/Ler.lua/main/source.lua')
  
-if source == nil then
+if text == nil then
     print("bug what the hell")
 end
+
+source = require(text)
 
 local HumanoidStupidTable = {}
 
