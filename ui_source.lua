@@ -1,5 +1,5 @@
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
-local source = loadstring(game:HttpGet('https://raw.githubusercontent.com/PandaHubRoblox/Ler.lua/main/source.lua'))()
+local source = loadstring(game:HttpGet('https://raw.githubusercontent.com/PandaHubRoblox/Ler.lua/main/source'))()
  
 
 local HumanoidStupidTable = {}
