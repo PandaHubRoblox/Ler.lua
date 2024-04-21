@@ -221,4 +221,3 @@ local giveToHumanoidValues = {
 	["JumpPower"] = 100;
 }
 API:GiveToHumanoid(game.Players.LocalPlayer, giveToHumanoidValues)
-API:KillAllPlayers(false, nil)
