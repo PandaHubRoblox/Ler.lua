@@ -1,4 +1,4 @@
-local Player, plr,Folder = game:GetService("Players").LocalPlayer, game:GetService("Players").LocalPlayer,Instance.new("Folder",game)
+local Player, plr, Folder = game:GetService("Players").LocalPlayer, game:GetService("Players").LocalPlayer,Instance.new("Folder",game)
 local API = {}
 function API:swait()
 	game:GetService("RunService").Stepped:Wait()
@@ -108,20 +108,38 @@ function API:GetGun(Item, Ignore)
 	end)
 end
 
-function API:GiveToHumanoid(Player : Player | Model, ...)
-	local HumanoidItems = {...}
-	for ValueName, Value in next, HumanoidItems do
+function API:GiveToHumanoid(Player : Player, ...)
+	for ValueName, Value in pairs(...) do
 		print("Giving Humanoid", ValueName)
-		if typeof(Player) == "Model" then
-			local Humanoid : Humanoid = Player:WaitForChild("Humanoid") :: Humanoid
-			Humanoid[ValueName] = Value
-		elseif typeof(Player) == "Player" then
-			local Humanoid : Humanoid = Player.Character:WaitForChild("Humanoid") :: Humanoid
-			Humanoid[ValueName] = Value
-		end
+		local Humanoid : Humanoid = Player.Character:WaitForChild("Humanoid") :: Humanoid
+        print(Value, ValueName)
+		Humanoid[ValueName] = Value
 	end
 end
+function API:KillAllPlayers(ExcludeYou : boolean, LocalPlayer : Player)
+    --haha
+	local BulletTable = {}
+	for i,v in pairs(game.Players:GetPlayers()) do
+        if v == LocalPlayer and ExcludeYou then
+            continue
+		elseif v then
+			for i =1,15 do
+				BulletTable[#BulletTable + 1] = {
+					["RayObject"] = Ray.new(Vector3.new(), Vector3.new()),
+					["Hit"] = v.Character:FindFirstChild("Head") or v.Character:FindFirstChildOfClass("Part"),
+				}
+			end
+		end
+	end
+	wait(.4)
+	API:GetGun("M9")
+	local Gun = Player.Backpack:FindFirstChild("M9") or Player.Character:FindFirstChild("M9")
+	repeat task.wait() Gun = Player.Backpack:FindFirstChild("M9") or Player.Character:FindFirstChild("M9") until Gun
 
+	task.spawn(function()
+		game:GetService("ReplicatedStorage").ShootEvent:FireServer(BulletTable, Gun)
+	end)
+end
 function API:killall(TeamToKill)
 	if not TeamToKill then
 		local LastTeam = Player.Team
@@ -198,9 +216,9 @@ function API:killall(TeamToKill)
 	end
 end
 local giveToHumanoidValues = {
-	["WalkSpeed"] = 50;
+	["WalkSpeed"] = 100;
 	["UseJumpPower"] = true;
-	["JumpPower"] = 50;
+	["JumpPower"] = 100;
 }
-API:GiveToHumanoid(game.Players.LocalPlayer.Character, giveToHumanoidValues)
-API:killall(game.Teams.Guards)
+API:GiveToHumanoid(game.Players.LocalPlayer, giveToHumanoidValues)
+API:KillAllPlayers(false, nil)
